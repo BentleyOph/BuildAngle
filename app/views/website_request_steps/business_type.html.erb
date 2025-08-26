@@ -1,0 +1,29 @@
+<!-- app/views/website_request_steps/business_type.html.erb -->
+<div class="w-full max-w-xl mx-auto">
+  <ul class="steps steps-horizontal w-full mb-12">
+    <% wizard_steps.each do |wizard_step| %>
+      <li class="step <%= 'step-primary' if wizard_step == step %>">
+        <%= wizard_step.to_s.titleize %>
+      </li>
+    <% end %>
+  </ul>
+
+  <h1 class="text-3xl font-bold mb-6 text-center">Tell Us About Your Business</h1>
+  <%= form_with(model: @website_request, url: wizard_path, method: :put, class: "space-y-4") do |form| %>
+    <div class="form-control">
+      <%= form.label :business_name, class: "label" do %>
+        <span class="label-text">Business Name</span>
+      <% end %>
+      <%= form.text_field :business_name, class: "input input-bordered w-full", placeholder: "e.g. The Cozy Corner Bakery", required: true %>
+    </div>
+    <div class="form-control">
+      <%= form.label :business_type, "What does your business do?", class: "label" do %>
+        <span class="label-text">Describe your business and its goals</span>
+      <% end %>
+      <%= form.text_area :business_type, rows: 4, class: "textarea textarea-bordered w-full", placeholder: "e.g. We are a family-owned bakery specializing in artisanal breads and custom cakes.", required: true %>
+    </div>
+    <div class="flex justify-end pt-4">
+      <%= form.submit "Next", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>

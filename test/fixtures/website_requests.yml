@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  business_name: MyString
+  business_type: MyString
+  design_preferences: MyText
+  target_audience: MyText
+  status: MyString
+
+two:
+  business_name: MyString
+  business_type: MyString
+  design_preferences: MyText
+  target_audience: MyText
+  status: MyString

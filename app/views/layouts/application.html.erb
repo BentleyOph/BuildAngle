@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html data-theme="black">
+  <head>
+    <title><%= content_for(:title) || "Build Angle" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= yield :head %>
+
+    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
+    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
+
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body class="min-h-screen">
+    <% unless controller_name == 'previews' %>
+      <header class="absolute top-0 left-0 p-8">
+        <a href="/" class="text-2xl font-bold">BuildAngle</a>
+      </header>
+      <main class="w-full max-w-4xl p-8 flex flex-col items-center justify-center min-h-screen mx-auto">
+        <%= yield %>
+      </main>
+    <% else %>
+      <%= yield %>
+    <% end %>
+  </body>
+</html>

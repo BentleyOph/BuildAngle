@@ -1,0 +1,38 @@
+<!-- app/views/website_request_steps/design_preferences.html.erb -->
+<div class="w-full max-w-xl mx-auto">
+  <ul class="steps steps-horizontal w-full mb-12">
+    <% wizard_steps.each do |wizard_step| %>
+      <% step_class = "step" %>
+      <% step_class << " step-primary" if past_step?(wizard_step) || wizard_step == step %>
+      <li class="<%= step_class %>">
+        <%= wizard_step.to_s.titleize %>
+      </li>
+    <% end %>
+  </ul>
+
+  <h1 class="text-3xl font-bold mb-6 text-center">What's Your Style?</h1>
+  <%= form_with(model: @website_request, url: wizard_path, method: :put, class: "space-y-4") do |form| %>
+    <div class="form-control">
+      <%= form.label :style_preferences, "Describe the look and feel you want", class: "label" do %>
+        <span class="label-text">e.g., Modern, Minimalist, Playful</span>
+      <% end %>
+      <%= form.text_field :style_preferences, class: "input input-bordered w-full", placeholder: "Clean lines, lots of white space...", required: true %>
+    </div>
+    <div class="form-control">
+      <%= form.label :color_preferences, "Any preferred colors?", class: "label" do %>
+        <span class="label-text">e.g. Blues and grays, or warm earth tones</span>
+      <% end %>
+      <%= form.text_field :color_preferences, class: "input input-bordered w-full", placeholder: "Primary color: navy blue, accent: gold", required: true %>
+    </div>
+    <div class="form-control">
+      <%= form.label :inspiration_websites, "List some websites you like (optional)", class: "label" do %>
+        <span class="label-text">URLs of sites with a style you admire</span>
+      <% end %>
+      <%= form.text_area :inspiration_websites, rows: 4, class: "textarea textarea-bordered w-full", placeholder: "e.g., https://stripe.com, https://apple.com" %>
+    </div>
+    <div class="flex justify-between pt-4">
+      <%= link_to "Back", previous_wizard_path, class: "btn btn-ghost" %>
+      <%= form.submit "Next", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>

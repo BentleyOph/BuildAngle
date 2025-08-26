@@ -1,0 +1,12 @@
+<!-- app/views/website_requests/generating.html.erb -->
+<div data-controller="generation-status"
+     data-generation-status-url-value="<%= perform_generation_website_request_path(@website_request) %>"
+     data-generation-status-error-url-value="<%= root_path %>"
+     class="text-center w-full">
+
+  <div class="flex flex-col items-center justify-center space-y-4">
+    <div class="radial-progress animate-spin text-primary" style="--value:70; --size:12rem; --thickness: 2px;"></div>
+    <p data-generation-status-target="message" class="text-xl mt-8">Initializing generation...</p>
+    <p class="text-sm text-base-content/70">This may take a minute or two. Please don't close this page.</p>
+  </div>
+</div>

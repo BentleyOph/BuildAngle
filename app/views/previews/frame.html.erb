@@ -1,0 +1,44 @@
+<div class="flex flex-col h-screen overflow-x-hidden" data-controller="preview-toggle">
+  <header class="navbar bg-base-100 shadow-lg">
+    <div class="navbar-start">
+      <a href="/" class="text-2xl font-bold">BuildAngle</a>
+    </div>
+    <div class="navbar-end flex gap-2 ml-auto">
+      <div class="tooltip tooltip-bottom" data-tip="Toggle Code View">
+        <button class="btn btn-ghost btn-circle" data-action="click->preview-toggle#toggle">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>
+        </button>
+      </div>
+
+      <div class="tooltip tooltip-bottom" data-tip="Download Website Files">
+        <%= link_to download_website_request_path(@website_request), class: "btn btn-ghost btn-circle", data: { turbo: false } do %>
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3" />
+          </svg>
+        <% end %>
+      </div>
+
+      <% if @website_request.deployed_at? %>
+        <div class="tooltip tooltip-left " data-tip="Deployed to <%= @website_request.repo_url %>">
+          <button class="btn btn-success" disabled>Deployed</button>
+        </div>
+      <% else %>
+        <%= button_to "Deploy", deploy_website_request_path(@website_request), method: :post, class: "btn btn-primary", data: { turbo: false } %>
+      <% end %>
+    </div>
+  </header>
+
+  <main class="flex-grow overflow-hidden">
+    <div class="w-full h-full flex flex-col">
+      <div data-preview-toggle-target="previewPane" class="w-full h-full">
+        <iframe name="preview_iframe"
+                src="<%= serve_site_page_path(@website_request, page: 'index') %>"
+                class="w-full h-full border-0">
+        </iframe>
+      </div>
+      <div data-preview-toggle-target="codePane" class="w-full h-full hidden p-4 overflow-auto">
+        <pre><code class="language-html text-sm">Code view is a future feature. Toggle back to see the site preview.</code></pre>
+      </div>
+    </div>
+  </main>
+</div>
