@@ -190,7 +190,6 @@ Build Angle generates complete static websites that can be exported as ZIP files
 - **Ready for Deployment**: Works with any hosting platform (GitHub Pages, Netlify, Vercel, etc.)
 - **Automatic Cleanup**: Temporary ZIP files are cleaned up after 60 seconds
 
-*[Screenshot placeholder: ZIP download dialog showing generated website package]*
 
 ## 📧 Email Notification System
 
